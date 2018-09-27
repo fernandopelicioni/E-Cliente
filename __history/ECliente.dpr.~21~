@@ -1,0 +1,30 @@
+program ECliente;
+
+uses
+  Vcl.Forms,
+  UtNucleo in 'UtNucleo.pas' {FormNucleo},
+  Vcl.Themes,
+  Vcl.Styles,
+  UtPai in 'UtPai.pas' {Pai: TDataModule},
+  UtIniciaSistema in 'IniciaSistema\UtIniciaSistema.pas' {FormIniciaSistema},
+  UtCadastroCliente in 'UtCadastroCliente.pas' {FormCadatroClientes},
+  UtModelo in 'UtModelo.pas' {FormModelo},
+  UtCadastroDeficiencias in 'UtCadastroDeficiencias.pas' {FormCadastroDeficiencia},
+  UtCadastroEntidades in 'UtCadastroEntidades.pas' {FormCadastroEntidade},
+  UtCadastroSituacao in 'UtCadastroSituacao.pas' {FormCadastroSituacao};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Luna');
+  Application.CreateForm(TPai, Pai);
+  Application.CreateForm(TFormIniciaSistema, FormIniciaSistema);
+  Application.CreateForm(TFormNucleo, FormNucleo);
+  Application.CreateForm(TFormModelo, FormModelo);
+  Application.CreateForm(TFormCadastroDeficiencia, FormCadastroDeficiencia);
+  Application.CreateForm(TFormCadastroEntidade, FormCadastroEntidade);
+  Application.CreateForm(TFormCadastroSituacao, FormCadastroSituacao);
+  Application.Run;
+end.

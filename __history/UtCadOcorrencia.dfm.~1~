@@ -1,0 +1,26 @@
+inherited FormCadOcorrencia: TFormCadOcorrencia
+  Caption = 'FormCadOcorrencia'
+  ExplicitWidth = 597
+  ExplicitHeight = 438
+  PixelsPerInch = 96
+  TextHeight = 21
+  inherited PageControl1: TPageControl
+    inherited TabLista: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 41
+      ExplicitWidth = 573
+      ExplicitHeight = 354
+    end
+    inherited TabEdicao: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 41
+      ExplicitWidth = 573
+      ExplicitHeight = 354
+    end
+  end
+  inherited QrCadastro: TFDQuery
+    SQL.Strings = (
+      'select * from '
+      'tb_cli_CadOcorrencia')
+  end
+end

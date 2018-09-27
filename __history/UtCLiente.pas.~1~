@@ -1,0 +1,17 @@
+unit UtCLiente;
+
+interface
+
+type
+TCliente = class
+private
+
+public
+      CodigoE1 : String;
+
+
+end;
+
+implementation
+
+end.

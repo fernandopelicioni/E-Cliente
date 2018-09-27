@@ -1,0 +1,92 @@
+inherited FormCadastroDeficiencia: TFormCadastroDeficiencia
+  Caption = 'Cadastro de Deficiencias'
+  ClientHeight = 396
+  ExplicitWidth = 597
+  ExplicitHeight = 435
+  PixelsPerInch = 96
+  TextHeight = 21
+  inherited PageControl1: TPageControl
+    Height = 396
+    ActivePage = TabEdicao
+    ExplicitHeight = 396
+    inherited TabLista: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 41
+      ExplicitWidth = 573
+      ExplicitHeight = 351
+      inherited DBGrid1: TDBGrid
+        Height = 294
+        OnDblClick = nil
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'DEF_ID'
+            Title.Caption = 'ID'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Segoe UI Light'
+            Title.Font.Style = []
+            Width = 52
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEF_DES'
+            Title.Caption = 'Descri'#231#227'o'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Segoe UI Light'
+            Title.Font.Style = []
+            Width = 229
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEF_INFORMACOES'
+            Title.Caption = 'Informa'#231#245'es'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Segoe UI Light'
+            Title.Font.Style = []
+            Width = 261
+            Visible = True
+          end>
+      end
+    end
+    inherited TabEdicao: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 41
+      ExplicitWidth = 573
+      ExplicitHeight = 351
+      inherited Panel2: TPanel
+        Height = 351
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 573
+        ExplicitHeight = 351
+        inherited Enome: TDBEdit
+          DataField = 'DEF_DES'
+          DataSource = DtCadastro
+        end
+        inherited DBEdit2: TDBEdit
+          DataField = 'DEF_ID'
+          DataSource = DtCadastro
+        end
+        inherited DBMemo1: TDBMemo
+          DataField = 'DEF_INFORMACOES'
+          DataSource = DtCadastro
+        end
+        inherited Button4: TButton
+          OnClick = nil
+        end
+      end
+    end
+  end
+  inherited QrCadastro: TFDQuery
+    SQL.Strings = (
+      'select * from TB_Cli_deficiencias')
+  end
+end

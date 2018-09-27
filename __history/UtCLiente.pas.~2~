@@ -1,0 +1,60 @@
+unit UtCLiente;
+
+interface
+
+type
+TCliente = class
+private
+
+public
+      CODIGO : String;
+      CODIGOEMPRESA1 : String;
+      Nome: String;
+      NOMEABREVIADO: String;
+      NOMEMAE: String;
+      LOGIN: String;
+      DATANASCIMENTO: String;
+      CPF: String;
+      RG: String;
+      TEL1: String;
+      Tel2: String;
+      Endereco: String;
+      Complemento: String;
+      BAIRRO: String;
+      CIDADE: String;
+      UF: String;
+      CEP: String;
+      NOMEPAI: String;
+      ENTIDADE: String;
+      DEFICIENCIA: String;
+      CID: String;
+      OBS: String;
+      SEXO: String;
+      PROFISSAO: String;
+      RESP_NOME: String;
+      RESP_CPF: String;
+      RESP_PARANTESCO: String;
+      RESP_NASC: String;
+      RESP_RG: String;
+      DATAHORA: String;
+      USUARIO: String;
+      VINCULO: String;
+      SITUACAO: String;
+      SIT_DAVAVALIDADE: String;
+      SIT_INFO: String;
+      ENVELOPE: String;
+      CID2: String;
+      CID3: String;
+      CID4: String;
+
+
+
+
+
+
+
+end;
+
+implementation
+
+end.

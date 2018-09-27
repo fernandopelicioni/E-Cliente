@@ -1,0 +1,181 @@
+unit UtOcorrencias;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, System.ImageList, Vcl.ImgList,
+  cxGraphics, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
+  dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint, dxSkinCaramel,
+  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle,
+  dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast,
+  dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky,
+  dxSkinMcSkin, dxSkinMetropolis, dxSkinMetropolisDark, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinOffice2013DarkGray,
+  dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinOffice2016Colorful,
+  dxSkinOffice2016Dark, dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic,
+  dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters,
+  dxSkinValentine, dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, cxTextEdit, cxMaskEdit, cxDBEdit, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TFormOcorrencias = class(TForm)
+    PageControl1: TPageControl;
+    TabLista: TTabSheet;
+    Panel1: TPanel;
+    Button4: TButton;
+    ComboBox1: TComboBox;
+    Edit1: TEdit;
+    Button5: TButton;
+    DBGrid1: TDBGrid;
+    TabEdicao: TTabSheet;
+    Panel2: TPanel;
+    cxImageList1: TcxImageList;
+    DtNewCliente: TDataSource;
+    QrNewCliente: TFDQuery;
+    QrOco: TFDQuery;
+    DtOco: TDataSource;
+    Panel3: TPanel;
+    Label18: TLabel;
+    DBEdit2: TDBEdit;
+    Enome: TDBEdit;
+    Label19: TLabel;
+    Button3: TButton;
+    Button6: TButton;
+    Label2: TLabel;
+    Enasc: TcxDBMaskEdit;
+    CbTipo: TDBLookupComboBox;
+    Label23: TLabel;
+    DtTipoOco: TDataSource;
+    QrTipoOco: TFDQuery;
+    DBText1: TDBText;
+    Label1: TLabel;
+    DBMemo2: TDBMemo;
+    Label3: TLabel;
+    GroupBox1: TGroupBox;
+    DBGrid2: TDBGrid;
+    QrMovOco: TFDQuery;
+    DtMovOco: TDataSource;
+    procedure Button5Click(Sender: TObject);
+     procedure BuscaCliente;
+    procedure Button3Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1Enter(Sender: TObject);
+    procedure Edit1Enter(Sender: TObject);
+  private
+  matricula :String;
+    Nome,NomeMae,CPF:string;
+    Campo,CamposNaoPreenchidos:String;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormOcorrencias: TFormOcorrencias;
+
+implementation
+
+{$R *.dfm}
+procedure TFormOcorrencias.BuscaCliente;
+begin
+with QrNewCliente do
+           begin
+                   close;
+                   ParamByName('Nome').Value:=nome;
+                   ParamByName('Cpf').Value:=CPF;
+                   ParamByName('Matricula').Value:=MAtricula;
+                   ParamByName('NomeMae').Value:=NomeMae;
+                   Open;
+           end;
+       end;
+
+procedure TFormOcorrencias.Button3Click(Sender: TObject);
+begin
+         With QrOco do
+            begin
+                   FieldByName('Mcli_cliente').AsString:=QrNewCliente.FieldByName('codigo').AsString;
+                   post;
+                   TabLista.show;
+
+            end;
+end;
+
+procedure TFormOcorrencias.Button4Click(Sender: TObject);
+begin
+    With QrOco do
+       begin
+         Open;
+         Insert;
+       end;
+    TabEdicao.Show;
+    Enasc.SetFocus;
+end;
+
+procedure TFormOcorrencias.Button5Click(Sender: TObject);
+begin
+      matricula:='%';  cpf:='%'; nomemae:='%'; nome:='%';
+      case ComboBox1.ItemIndex of
+          0: Nome:='%'+Edit1.Text+'%';
+          1: CPF:='%'+Edit1.Text+'%';
+          2: Matricula:='%'+Edit1.Text+'%';
+          3: NomeMae:='%'+Edit1.Text+'%';
+      end;
+
+      BuscaCliente;
+      DBGrid1.SetFocus;
+
+end;
+
+procedure TFormOcorrencias.DBGrid1DblClick(Sender: TObject);
+begin
+        With QrMovOco do
+           begin
+                 close;
+               //  ParamByName('Cliente').AsString:=QrNewCliente.FieldByName('codigo').AsString;
+                 Open;
+           end;
+end;
+
+procedure TFormOcorrencias.DBGrid1Enter(Sender: TObject);
+begin
+        With QrMovOco do
+           begin
+                 close;
+               //  ParamByName('Cliente').AsString:=QrNewCliente.FieldByName('codigo').AsString;
+                 Open;
+           end;
+
+end;
+
+procedure TFormOcorrencias.Edit1Enter(Sender: TObject);
+begin
+    QrMovOco.Close;
+end;
+
+procedure TFormOcorrencias.FormCreate(Sender: TObject);
+begin
+     PageControl1.ActivePageIndex:=0;
+
+     With QrNewCliente do
+        begin
+             open;
+        end;
+     With QrTipoOco do
+        begin
+             open;
+        end;
+
+end;
+
+end.
